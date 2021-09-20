@@ -4,9 +4,10 @@ import React, { useState, useEffect } from 'react';
 import InfoBox from './InfoBox';
 import Map from './Map';
 import Table from './Table';
-import { sortData } from './util';
+import { sortData, prettyPrintStat } from './util';
 import LineGraph from './LineGraph';
 import "leaflet/dist/leaflet.css";
+import numeral from 'numeral';
 
 function App() {
 
@@ -36,7 +37,7 @@ function App() {
       await fetch("https://disease.sh/v3/covid-19/countries")
         .then((res => res.json()))
         .then((data) => {
-          console.log("appp",data)
+          console.log("appp", data)
           const countries = data.map((country) => (
             {
               name: country.country,
@@ -100,28 +101,39 @@ function App() {
 
           {/* infobox corona cases*/}
           <InfoBox
+            isRed
+            active={casesType === 'cases'}
+            onClick={e => setCasesType("cases")}
             title="CoronaVirus Cases"
-            cases={countryInfo.todayCases}
-            total={countryInfo.cases}
+            cases={prettyPrintStat(countryInfo.todayCases)}
+            total={prettyPrintStat(countryInfo.cases)}
           />
 
           <InfoBox
+            isRed
+            active={casesType === 'active'}
+            onClick={e => setCasesType("active")}
             title="Active Cases"
-            cases={countryInfo.active}
+            cases={prettyPrintStat(countryInfo.active)}
           />
 
           {/* infobox recovery*/}
           <InfoBox
+            active={casesType === "recovered"}
+            onClick={e => setCasesType("recovered")}
             title="Recovered"
-            cases={countryInfo.todayRecovered}
-            total={countryInfo.recovered}
+            cases={prettyPrintStat(countryInfo.todayRecovered)}
+            total={prettyPrintStat(countryInfo.recovered)}
           />
 
           {/* infobox death*/}
           <InfoBox
+            isRed
+            active={casesType === "deaths"}
+            onClick={e => setCasesType("deaths")}
             title="Deaths"
-            cases={countryInfo.todayDeaths}
-            total={countryInfo.deaths}
+            cases={prettyPrintStat(countryInfo.todayDeaths)}
+            total={prettyPrintStat(countryInfo.deaths)}
           />
 
         </div>
@@ -137,15 +149,21 @@ function App() {
       </div>
       <Card className="app__right">
         <CardContent>
-          {/* table  */}
-          <h3>Live cases by Country</h3>
-          <Table countries={tableData} />
+          <div className="table">
+            {/* table  */}
+            <h3>Live cases by Country</h3>
+            <Table countries={tableData} />
+          </div>
+
 
 
           {/* graph */}
-          <h3>Worldwide new cases</h3>
+          <div className="graph">
+            <h3>Worldwide new {casesType}</h3>
 
-          <LineGraph casesType={casesType} />
+            <LineGraph className="app__graph" casesType={casesType} />
+          </div>
+
         </CardContent>
 
       </Card>

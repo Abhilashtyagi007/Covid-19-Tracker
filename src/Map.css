@@ -2,7 +2,7 @@
     height: 100vh;
     width: 96%;
     background-color: #fff;
-    border: 2px solid blueviolet;
+    border: 1px solid rgb(174, 164, 184);
     border-radius: 20px;
     padding: 1rem;
     margin-top: 16px;
@@ -10,34 +10,37 @@
 }
 
 .map .leaflet-container {
-    height: 99%;
+    height: 100%;
     border-radius: 12px;
     margin: 2px 2px;
 }
-
-.info-flag img {
-    width: 100px;
-    border-radius: 5px;
-}
-
-.info-name {
-    font-size: 20px;
-    font-weight: bold;
-    color: #555;
-}
-
 .info-container {
     width: 150px;
 }
 
 .info-flag {
     height: 80px;
-    width: 100%;
+    width: 80%;
     background-size: cover;
     border-radius: 8px;
+    background-repeat: no-repeat;
 }
 
-.info-confirmed, .info-recovered, .info-deaths {
-    font-size: 16px;
+.info-flag img {
+    width: 100px;
+    border-radius: 5px;
+    border: 1px solid rgb(240, 9, 9);
+}
+
+
+
+.info-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(122, 115, 115);
+}
+
+.info-confirmed, .info-recovered, .info-deaths , .info-active {
+    font-size: 12px;
     margin-top: 5px;
 }
