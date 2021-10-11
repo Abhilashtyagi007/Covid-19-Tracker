@@ -1,4 +1,4 @@
-# Getting Started with Create React App
+# Covid-19 Tracker
 
 [Live Preview](https://covid19trackker.herokuapp.com/)
 
